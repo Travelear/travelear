@@ -1,5 +1,12 @@
 import {useState} from 'react'
-import Slider from 'react-rangeslider'
+import {
+  SliderInput,
+  SliderTrack,
+  SliderRange,
+  SliderHandle,
+} from "@reach/slider";
+import "@reach/slider/styles.css";
+import Headphones from './svgs/headphones'
 
 export default function Player() {
 
@@ -24,13 +31,21 @@ export default function Player() {
 
     return (
       <div className="w-full pointer-events-auto">
-          <div className="h-full">
-            <Slider
-            orientation="vertical"
-            value={state.volume}
-            onChange={onVolumeChange}
-            />
+
+          <div className="flex flex-col justify-center items-center mb-6">
+            <div className="w-10 h-10">
+              <Headphones/>
+            </div>
+            <div>
+              <SliderInput min={0} max={100} step={1} orientation={"vertical"} value={state.volume} onChange={onVolumeChange}>
+                <SliderTrack className="slider-track">
+                  <SliderRange className="slider-range"/>
+                  <SliderHandle className="slider-handle"/>
+                </SliderTrack>
+              </SliderInput>
+            </div>
           </div>
+
           <div className="h-50 w-50">
             <button type="button" className="mx-auto">
               <svg width="50" height="50" fill="none">

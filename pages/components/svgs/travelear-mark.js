@@ -3,7 +3,7 @@ import React from "react";
 export default function TravelearMark() {
   return (
     <svg width="100%" height="100%" viewBox="0 0 66 91" version="1.1">
-        <g id="Brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Brand" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="WebNavLogo" transform="translate(-8.000000, -21.000000)" fill="#E74C3C">
                 <g id="Group" transform="translate(8.000000, 21.000000)">
                     <g id="Primary">
