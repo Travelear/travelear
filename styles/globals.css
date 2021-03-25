@@ -18,16 +18,13 @@ body {
 }
 
 .slider-track[data-reach-slider-track] {
-    background-color: black;
-    color: red;
+    background-color: #E4E4E4;
 }
 
 .slider-range[data-reach-slider-range] {
     background-color: black;
-    color: red;
 }
 
 .slider-handle[data-reach-slider-handle] {
     background-color: black;
-    color: red;
 }

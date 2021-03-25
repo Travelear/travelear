@@ -1,10 +1,18 @@
-import Navigation from '../components/navigation'
 
 export default function CreatePage(){
     return (
         <div>
-            <main className="justify-center flex-1 text-center">
-                <Navigation/>
+            <main className="flex justify-center items-center content-center">
+                <div className="p-6 mt-20 ml-2 mr-32 w-full space-y-4">
+                    <h1 className="border-b pb-6 font-bold text-left uppercase">
+                        Create a new recording
+                    </h1>
+                    <div>
+                        <p>
+                            Choose between two paths
+                        </p>
+                    </div>
+                </div>
             </main>
         </div>
     )
