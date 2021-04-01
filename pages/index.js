@@ -4,20 +4,15 @@ import Head from 'next/head'
 import Map from './components/map'
 import ProfilePage from './profiles/[profile]'
 import RecordingPage from './recordings/[record]'
+import TimeSlider from './components/audio-slider'
 import Modal from 'react-modal'
-import TravelearMark from './components/svgs/travelear-mark'
 import Link from 'next/link'
-import {
-  SliderInput,
-  SliderTrack,
-  SliderRange,
-  SliderHandle,
-} from "@reach/slider";
-import "@reach/slider/styles.css";
+
+// import VolumeUp from './components/svgs/volume-up'
+// import VolumeDown from './components/svgs/volume-down'
 
 import PlayButton from './components/svgs/play'
-import VolumeUp from './components/svgs/volume-up'
-import VolumeDown from './components/svgs/volume-down'
+
 
 Modal.setAppElement("#__next")
 
@@ -61,72 +56,54 @@ export default function Home() {
           <Map/>
         </div>
 
-                    {/* <div className="m-2 px-2">
-                <div className="cursor-pointer text-lg font-regular">
-                    <Link 
+        <div className="top-16 right-0 fixed space-y-2">
+
+          <div className="rounded-l-full bg-white shadow-xl">
+              <div className="p-2 flex">
+                <div className="center-items cursor-pointer">
+                      <Link 
                         href={`/?profile=${profile}`} 
-                        as={`/profiles/${profile}`}>
-                            <div className="w-full p-2">
-                                Profile
+                        as={`/p/${profile}`}>
+                            <div className="flex-none w-16 h-16 p-2 relative">
+                                <img className="absolute inset-0 w-full h-full rounded-full object-cover" src={"https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/image%2F%24747021f5-a18d-495b-998d-87f8cb750d35-garett-with-mic-for-travelear-pic.jpg?alt=media&token=4c028c02-8214-45f9-8f6a-4479580a8354"}/>
                             </div>
-                    </Link>
+                      </Link>
                 </div>
-            </div> */}
-        <div className="top-8 right-0 rounded-l-3xl fixed bg-white shadow-2xl">
-            <div className="p-2 flex">
-              <div className="center-items cursor-pointer">
-                <Link 
-                href={'/'}>
-                    <div className="w-16 h-16 p-2">
-                      <TravelearMark/>
+              </div>
+          </div>
+        </div>
+
+        <div className="bottom-16 left-0 fixed ">
+          <div className="flex items-center space-x-8">
+            <div className="space-y-2">
+              <div className="rounded-r-full bg-white shadow-xl">
+                <div className="p-2 flex">
+                  <div className="center-items cursor-pointer">
+                    <Link 
+                        href={`/?recording=${recording}`} 
+                        as={`/r/${recording}`}>
+                          <div className="flex-none w-16 h-16 p-2 relative">
+                              <img className="absolute inset-0 w-full h-full rounded-full object-cover" src={"https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/users%2FEVwm7DMBdFPXAE0wn41ijYErSjW2%2Fimages%2FElephant-Seal-Beach_San-Simeon-California_192_020417.jpg?alt=media&token=6a8d0454-0626-4a75-8c20-512e59d1d278"}/>
+                          </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-r-full bg-white shadow-xl">
+                  <div className="p-2 flex">
+                    <div className="center-items cursor-pointer">
+                      <button type="button" className="flex-none w-16 h-16 p-2 relative">
+                          <PlayButton/>
+                      </button>
                     </div>
-                </Link>
+                  </div>
               </div>
             </div>
-        </div>
-
-        {/* <div className="top-8 left-0 w-3/4 rounded-r-3xl fixed bg-white shadow-2xl">
-          <div className="p-2 flex">
-            <div className="center-items cursor-pointer">
-                <Link 
-                    href={`/?recording=${recording}`} 
-                    as={`/recording/${recording}`}>
-                      <div className="flex-none w-16 h-16 p-2 relative">
-                        <img className="absolute inset-0 w-full h-full rounded-lg object-cover" src="https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/users%2FEVwm7DMBdFPXAE0wn41ijYErSjW2%2Fimages%2FElephant-Seal-Beach_San-Simeon-California_192_020417.jpg?alt=media&token=6a8d0454-0626-4a75-8c20-512e59d1d278" alt="" />
-                      </div>
-                </Link>
-              </div>
-            </div>
-        </div> */}
-
-        <div className="fixed left-16 bottom-16 flex">
-          <div className="h-full w-full p-6 flex justify-center space-x-6 bg-white shadow-2xl rounded-3xl">
-            <div className="w-full space-y-6">
-              <div className="w-32">
-                <SliderInput min={0} max={100} step={1} orientation={"horizontal"} value={state.currentTime} onChange={onCurrentTimeChange}>
-                  <SliderTrack className="slider-track">
-                    <SliderRange className="slider-range"/>
-                    <SliderHandle className="slider-handle"/>
-                  </SliderTrack>
-                </SliderInput>
-              </div>
-              <div className="h-16 w-16">
-                <button type="button" className="">
-                  <PlayButton/>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="w-8 h-8">
-            <VolumeUp/>
-            </div>
-            <div className="w-8 h-8">
-            <VolumeDown/>
+            <div className="ml-8 m-8">
+            <TimeSlider/>
             </div>
           </div>
         </div>
-
 
       </main>
       <Modal
