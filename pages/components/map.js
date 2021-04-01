@@ -7,7 +7,7 @@ import ZoomIn from './svgs/zoom-in'
 export default function Map(){
 
     const router = useRouter()
-    const { ref, map, google } = useGoogleMaps("AIzaSyB1GefB4OQG2IiRBwzjVdM98a376eXOwcE", {
+    const { ref, map, google } = useGoogleMaps("", {
         center: {
         lat: -33.890542, 
         lng: 151.274856
