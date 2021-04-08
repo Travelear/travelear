@@ -1,14 +1,31 @@
 import React, { useRef, useEffect, useState } from "react"
+import Link from 'next/link'
+import PlayButton from '../../pages/components/svgs/play'
+import BookMark from '../components/svgs/bookmark'
+import VolumeUp from '../../pages/components/svgs/volume-up'
+import VolumeDown from '../../pages/components/svgs/volume-down'
+import {
+  SliderInput,
+  SliderTrack,
+  SliderRange,
+  SliderHandle,
+} from "@reach/slider";
+import "@reach/slider/styles.css";
+
 
 const testFile = 'https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/users%2FEVwm7DMBdFPXAE0wn41ijYErSjW2%2Faudio%2FElephant-Seal-Beach_San-Simeon-California_192_020417.mp3?alt=media&token=e7774d74-6151-42ef-b526-91ec7d51c5a5'
 
-export default function TimeSlider(){
+export default function Player(){
 
   const [state, setState] = useState({
     timerOn: false,
     timerStart: 0,
-    timerTime: 0
+    timerTime: 0,
+    currentTime: 0,
   })
+
+  const profile = '1234'
+  const recording = '1234'
 
   const startTimer = () => {
     setState({
@@ -25,7 +42,7 @@ export default function TimeSlider(){
       } else {
         clearInterval(timer);
         setState({ timerOn: false });
-        alert("Countdown ended");
+        alert("ended");
       }
     }, 10);
   };
@@ -41,6 +58,24 @@ export default function TimeSlider(){
       });
     }
   };
+
+  const onVolumeChange = (volume) => {
+    setState({...state, volume: volume})
+  }
+
+  const onCurrentTimeChange = (currentTime) => {
+    setState({...state, currentTime: currentTime})
+  }
+
+  const timeToSeconds = (str) => {
+    var p = str.split(':'),
+        s = 0, m = 1;
+    while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
+    }
+    return s;
+  }
 
   const adjustTimer = (input) => {
     const { timerTime, timerOn } = state;
@@ -67,54 +102,30 @@ export default function TimeSlider(){
   let hours = ("0" + Math.floor((timerTime / 3600000) % 60)).slice(-2);
 
   return (
-    <div className="bg-white shadow-sm rounded-lg">
-      <div className="Countdown p-2">
-        <div className="Countdown-display">
-          <button onClick={() => adjustTimer("incHours")}>&#8679;</button>
-          <button onClick={() => adjustTimer("incMinutes")}>
-            &#8679;
-          </button>
-          <button onClick={() => adjustTimer("incSeconds")}>
-            &#8679;
-          </button>
-
-          <div className="Countdown-time font-bold text-5xl">
-            {hours} : {minutes} : {seconds}
-          </div>
-
-          <button onClick={() => adjustTimer("decHours")}>&#8681;</button>
-          <button onClick={() => adjustTimer("decMinutes")}>
-            &#8681;
-          </button>
-          <button onClick={() => adjustTimer("decSeconds")}>
-            &#8681;
-          </button>
+    <div className="w-full h-full text-black">
+        <div className="flex flex-wrap justify-center items-center">
+              <div className="w-full h-12 flex justify-center items-center px-4">
+                <div className="w-full">
+                  <SliderInput min={0} max={100} step={1} orientation={"horizontal"} value={state.currentTime} onChange={onCurrentTimeChange}>
+                      <SliderTrack className="slider-track">
+                        <SliderRange className="slider-range"/>
+                        <SliderHandle className="slider-handle"/>
+                      </SliderTrack>
+                  </SliderInput>
+                </div>
+              </div>
+              <div className="w-full flex flex-row h-16 items-center justify-between px-4 pb-4">
+                <div>
+                  <p>{hours}:{minutes}:{seconds}</p>
+                </div>
+                <div className="w-16 h-16 font-bold center-items cursor-pointer">
+                  <PlayButton/>
+                </div>
+                <div>
+                  <p>{hours}:{minutes}:{seconds}</p>
+                </div>
+              </div>
         </div>
-
-        {timerOn === false && (timerStart === 0 || timerTime === timerStart) && (
-          <button className="Button-start" onClick={startTimer}>
-            Start
-          </button>
-        )}
-        {timerOn === true && timerTime >= 1000 && (
-          <button className="Button-stop" onClick={stopTimer}>
-            Stop
-          </button>
-        )}
-        {timerOn === false &&
-          (timerStart !== 0 && timerStart !== timerTime && timerTime !== 0) && (
-            <button className="Button-start" onClick={startTimer}>
-              Resume
-            </button>
-          )}
-
-        {(timerOn === false || timerTime < 1000) &&
-          (timerStart !== timerTime && timerStart > 0) && (
-            <button className="Button-reset" onClick={resetTimer}>
-              Reset
-            </button>
-          )}
-      </div>
     </div>
   );
 }

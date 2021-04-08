@@ -17,15 +17,88 @@ body {
   height: 100%;
 }
 
+.volume-slider-track[data-reach-slider-track] {
+  background-color: #E74C3C;
+}
+
 .slider-track[data-reach-slider-track] {
-    background-color: #E4E4E4;
-    height: 64px;
+    background-color: #000000;
 }
 
 .slider-range[data-reach-slider-range] {
-    background-color: #E4E4E4;
+    background-color: #000000;
 }
 
 .slider-handle[data-reach-slider-handle] {
-    background-color: black;
+    background-color: #000000;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Share&display=swap');
+
+.S [data-kind="digit"],
+.M [data-kind="digit"],
+.L [data-kind="digit"],
+.XL [data-kind="digit"] {
+  font-family: 'Share', sans-serif;
+  width: 1.1ch;
+}
+
+.S [data-kind="digit"][data-mode="alpha"],
+.M [data-kind="digit"][data-mode="alpha"],
+.L [data-kind="digit"][data-mode="alpha"],
+.XL [data-kind="digit"][data-mode="alpha"] {
+  width: 1.35ch;
+}
+
+.S [data-kind="digit"][data-mode="words"],
+.M [data-kind="digit"][data-mode="words"],
+.L [data-kind="digit"][data-mode="words"],
+.XL [data-kind="digit"][data-mode="words"] {
+  width: 100%;
+}
+
+.S [data-kind="digit"] {
+  font-size: 18px;
+  line-height: 19px;
+}
+
+.M [data-kind="digit"] {
+  font-size: 30px;
+  line-height: 32px;
+}
+
+.L [data-kind="digit"] {
+  font-size: 48px;
+  line-height: 52px;
+}
+
+.XL [data-kind="digit"] {
+  font-size: 78px;
+  line-height: 82px;
+}
+
+.dark [data-kind="digit"]{
+  color: #F7FBFC;
+  background-color: #000;
+  border: 1px solid #111827;
+  border-radius: 2px;
+  margin-right: 1px;
+  box-shadow: 1px 1px 1px grey;
+}
+
+.dark [data-kind="digit"]:last-child {
+  margin-right: 0;
 }

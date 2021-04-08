@@ -1,5 +1,4 @@
-
-export default function CreatePage(){
+const Create = () => {
     return (
         <div>
             <main className="flex justify-center items-center content-center">
@@ -8,12 +7,11 @@ export default function CreatePage(){
                         Create a new recording
                     </h1>
                     <div>
-                        <p>
-                            Choose between two paths
-                        </p>
                     </div>
                 </div>
             </main>
         </div>
     )
 }
+
+export default Create;

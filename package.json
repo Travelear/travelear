@@ -9,12 +9,18 @@
   },
   "dependencies": {
     "@reach/slider": "^0.13.2",
+    "axios": "^0.21.1",
+    "firebase-admin": "^9.6.0",
     "framer-motion": "^4.0.2",
     "next": "10.0.9",
+    "qrcode.react": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-google-maps": "0.0.3",
-    "react-modal": "^3.12.1"
+    "react-modal": "^3.12.1",
+    "react-qr-reader": "^2.2.1",
+    "react-split-flap-effect": "^1.0.0",
+    "typeface-share": "^1.1.13"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
