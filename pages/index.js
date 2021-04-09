@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
-import Map from './components/map'
-import Add from './components/svgs/add'
-import Listen from './components/svgs/listen'
 
 import ProfilePage from './profiles/[profile]'
 import RecordingPage from './recordings/[recording]'
+import CreatePage from './admin/create'
 import Modal from 'react-modal'
+import List from './components/list'
+import Map from './components/map'
+import MapIcon from './components/svgs/map'
+import ListIcon from './components/svgs/list'
 
 // import VolumeUp from './components/svgs/volume-up'
 // import VolumeDown from './components/svgs/volume-down'
@@ -16,8 +19,19 @@ Modal.setAppElement("#__next")
 
 export default function Home() {
 
+  const [checkCreate, setCheckCreate] = useState(false)
+  const [checkMap, setCheckMap] = useState(false)
+
   const router = useRouter()
   const profile = '1234'
+
+  const setShowCreate = () => {
+    return setCheckCreate(prevCheck => !prevCheck)
+  }
+  
+  const setShowkMap = () => {
+    return setCheckMap(prevCheck => !prevCheck)
+  } 
   
 
   return (
@@ -28,11 +42,11 @@ export default function Home() {
       </Head>
       <main className="w-full flex flex-wrap">
 
-        <div className="w-full h-full">
-          <Map/>
+        <div className="w-full h-full bg-cloudwhite flex justift-left md:justify-center items-center pt-24">
+        <List/>
         </div>
 
-        <div className="top-16 right-0 fixed space-y-2">
+        <div className="top-24 right-0 fixed space-y-2">
           <div className="rounded-l-full bg-cloudwhite shadow-lg">
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
@@ -49,64 +63,43 @@ export default function Home() {
           <div className="rounded-l-full bg-cloudwhite shadow-lg">
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
-                      <Link 
-                        href={`/admin/create`}
-                        as={`/create`}
-                        >
-                            <div className="flex-none w-16 h-16 p-2 relative bg-explored rounded-full"/>
-                      </Link>
+                  <button className="flex-none w-16 h-16 p-2 relative bg-explored rounded-full" onClick={setShowCreate}/>
+                </div>
+              </div>
+          </div>
+          <div className="rounded-l-full bg-cloudwhite shadow-lg">
+              <div className="p-2 flex">
+                <div className="center-items cursor-pointer">
+                  <button className="flex-none w-16 h-16 p-2 relative bg-oceanblue rounded-full" onClick={setShowkMap}/>
                 </div>
               </div>
           </div>
         </div>
 
+        <div className="w-full fixed t-0 p-4 shadow-sm bg-cloudwhite">
+            <input type="search" className="form-input px-4 py-3 w-full border-gray-50" placeholder="Search"/>
+        </div>
+
       </main>
       <Modal
-        style={{
-          overlay: {
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(255, 255, 255, 0.75)'
-          },
-          content : {
-            top                   : '50%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            transform             : 'translate(-50%, -50%)'
-          }}}
         isOpen={!!router.query.profile}
         onRequestClose={() => router.push("/")}>
-          <ProfilePage/>
+          <div className="h-full flex justify-center items-center">
+            <ProfilePage/>
+          </div>
       </Modal>
       <Modal
-        style={{
-          overlay: {
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.75)'
-          },
-          content : {
-            top                   : '50%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            padding               : '0px',
-            border                : '1px solid #000000',
-            transform             : 'translate(-50%, -50%)'
-          }}}
         isOpen={!!router.query.recording}
         onRequestClose={() => router.push("/")}>
           <div className="h-full flex justify-center items-center">
             <RecordingPage/>
+          </div>
+      </Modal>
+      <Modal
+        isOpen={checkCreate}
+        onRequestClose={setShowCreate}>
+          <div className="h-full flex justify-center items-center">
+            <CreatePage/>
           </div>
       </Modal>
     </div>

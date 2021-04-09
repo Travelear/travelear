@@ -15,7 +15,8 @@ module.exports = {
       explored: '#E74C3C',
       travello: '#fbbf24',
       cloudwhite: '#F7FBFC',
-      oceanblue: '#14B1FF'
+      oceanblue: '#14B1FF',
+      nightblue: '#1C2833'
     },
     borderColor: (theme) => ({
       ...theme('colors'),
@@ -23,14 +24,16 @@ module.exports = {
       explored: '#E74C3C',
       travello: '#fbbf24',
       cloudwhite: '#F7FBFC',
-      oceanblue: '#14B1FF'
+      oceanblue: '#14B1FF',
+      nightblue: '#1C2833'
     }),
     gradientColorStops: theme => ({
       ...theme('colors'),
       explored: '#E74C3C',
       travello: '#fbbf24',
       cloudwhite: '#F7FBFC',
-      oceanblue: '#14B1FF'
+      oceanblue: '#14B1FF',
+      nightblue: '#1C2833'
      }),
     textColor: (theme) => ({
       ...theme('colors'),
@@ -38,6 +41,8 @@ module.exports = {
       travello: '#fbbf24',
       cloudwhite: '#F7FBFC',
       oceanblue: '#14B1FF'
+      ,
+      nightblue: '#1C2833'
     }),
     fontFamily:{
       departures: ["Share", "normal"]
@@ -47,5 +52,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }

@@ -15,7 +15,7 @@ const RecordingPage = () => {
 
   useEffect(async () => {
     const res = await axios.get(`/api/recording/${recording}`);
-    console.log(res)
+    console.log(recording)
     setEntry(res.data);
   }, []);
 

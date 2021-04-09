@@ -11,7 +11,7 @@ export default function Map(){
 
     const [entries, setEntries] = useState([]);
     const [value, setValue] = useState(0);
-    const { ref, map, google } = useGoogleMaps(process.env.MapApiKey, {
+    const { ref, map, google } = useGoogleMaps("AIzaSyBqvDFW8NGqHlfZIyjSQ0Hy-J2NJke5QWc", {
         center: {
         lat: 37.7749, 
         lng: 122.4194
@@ -19,6 +19,9 @@ export default function Map(){
         zoom: 15,
         minZoom:5,
         maxZoom:20,
+        scaleControl: false,
+        scrollwheel: false,
+        disableDoubleClickZoom: true,
         styles: [
             {
                 "featureType": "all",
@@ -263,7 +266,7 @@ export default function Map(){
               },
             title: recording[0]
         })
-            marker.addListener("click", () => {router.push(`/?recording=${recording[0].id}`,`/r/${recording[0].id}`)}, {
+            marker.addListener("click", () => {router.push(`/?recording=${recording.id}`,`/r/${recording.id}`)}, {
                 passive: true
               });
         }

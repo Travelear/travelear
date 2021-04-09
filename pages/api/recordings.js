@@ -2,7 +2,7 @@ import db from '../../utils/db';
 
 export default async (req, res) => {
   try {
-    const entries = await db.collection('tracks-published').orderBy('timestamp').get();
+    const entries = await db.collection('tracks-published').where("isPublic", "==", true).get();
     const entriesData = entries.docs.map(entry => ({
       id: entry.id,
       ...entry.data()
