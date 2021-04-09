@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import MoonIcon from './svgs/moon'
-import SunIcon from './svgs/sun'
+import TicketIcon from './svgs/ticket'
 import axios from 'axios';
 
 const List = () => {
@@ -28,7 +28,7 @@ const List = () => {
                                 <img className="absolute inset-0 w-full h-full rounded-full object-cover" src={"https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/image%2F%24747021f5-a18d-495b-998d-87f8cb750d35-garett-with-mic-for-travelear-pic.jpg?alt=media&token=4c028c02-8214-45f9-8f6a-4479580a8354"}/>
                             </div>
                             <div className="flex-none w-12 h-12 relative">
-                                {recording.isWorld? <SunIcon/> : <div/>}
+                                {recording.isWorld? <TicketIcon/> : <div/>}
                                 {recording.isSleep? <MoonIcon/> : <div/>}
                             </div>
                         </div>

@@ -11,6 +11,7 @@ import List from './components/list'
 import Map from './components/map'
 import MapIcon from './components/svgs/map'
 import ListIcon from './components/svgs/list'
+import MicrophoneIcon from './components/svgs/microphone'
 
 // import VolumeUp from './components/svgs/volume-up'
 // import VolumeDown from './components/svgs/volume-down'
@@ -42,7 +43,7 @@ export default function Home() {
       </Head>
       <main className="w-full flex flex-wrap">
 
-        <div className="w-full h-full bg-cloudwhite flex justift-left md:justify-center items-center pt-24">
+        <div className="w-full h-full bg-cloudwhite flex justify-center items-center pt-24">
         <List/>
         </div>
 
@@ -63,20 +64,24 @@ export default function Home() {
           <div className="rounded-l-full bg-cloudwhite shadow-lg">
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
-                  <button className="flex-none w-16 h-16 p-2 relative bg-explored rounded-full" onClick={setShowCreate}/>
+                  <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowCreate}>
+                    <MicrophoneIcon/>
+                  </button>
                 </div>
               </div>
           </div>
           <div className="rounded-l-full bg-cloudwhite shadow-lg">
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
-                  <button className="flex-none w-16 h-16 p-2 relative bg-oceanblue rounded-full" onClick={setShowkMap}/>
+                  <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowkMap}>
+                    <MapIcon/>
+                  </button>
                 </div>
               </div>
           </div>
         </div>
 
-        <div className="w-full fixed t-0 p-4 shadow-sm bg-cloudwhite">
+        <div className="w-full fixed t-0 p-4 bg-cloudwhite">
             <input type="search" className="form-input px-4 py-3 w-full border-gray-50" placeholder="Search"/>
         </div>
 
