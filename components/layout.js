@@ -1,12 +1,16 @@
+import React, { useState } from "react"
 import NavBar from "./navbar";
 import Footer from "./footer";
+import Map from "./map"
 
 export default function Layout({ children }) {
-    return (
-      <div>
-        <nav className><NavBar/></nav>
-        <main>{children}</main>
-        <Footer/>
-        </div>
-    )
+  return (
+    <div className="min-h-screen bg-white">
+          <NavBar/>
+          <main className="w-full">
+            {children}
+          </main>
+          <Footer/>
+    </div>
+  )
 }

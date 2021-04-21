@@ -5,22 +5,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#14B1FF',
+        primary: '#0D1319', // dark blue
+        primarylight: '#1C2833', // medium blue
+        secondary: '#E74C3C', // red
+        secondarydark: '#9A2216', // dark red
         calltoaction: '#fbbf24',
-        calltoactiondark: '#D34419',
-        accent: '#E74C3C',
-        success: '#3cc13b',
-        warning: '#f3bb1c',
-        error: '#f03738',
-        background: '#F7FBFC',
-        divider: '#091b34',
+        calltoactiondark: '#C99100',
+        calltoactiontext: '#FFF6E0',
+        accent: '#14B1FF',
         accentdark: '#0C6B77',
-        surface: '#F7FBFC',
-        calltoactiontext: '#fffaf9',
         accenttext: '#15bfd3',
+        success: '#3cc13b',
         successtext: '#3cc13b',
+        warning: '#f3bb1c',
+        warningtext: '#f3bb1c',
+        error: '#f03738',
         errortext: '#f03738',
-        warningtext: '#f3bb1c'
+        divider: '#091b34',
+        background: '#FFFFFF',
+        surface: '#F7FBFC',
       }
     },
   },

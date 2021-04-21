@@ -5,6 +5,7 @@ import LoopIcon from '../components/svgs/loop'
 import Layout from '../components/layout'
 import Post from '../components/post'
 import Modal from 'react-modal'
+import { backgroundOpacity } from "tailwindcss/defaultTheme"
 
 export default function Home(props) {
 
@@ -15,7 +16,7 @@ export default function Home(props) {
     <Layout>
       <main className="w-full flex flex-wrap p-4">
         {entries? entries.map(post => (
-              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4" key={post.id}>
+              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 bg-white" key={post.id}>
                   <Link 
                       href={`/?postId=${post.id}`}
                       as={`/posts/${post.id}`} 
@@ -56,7 +57,31 @@ export default function Home(props) {
                 </div>
           )): <div></div>}
       </main>
-      <Modal isOpen={!!router.query.postId} onRequestClose={() => router.push("/")}>
+      <Modal
+      style={
+        {
+          content : {
+            top                   : '50%',
+            left                  : '50%',
+            right                 : 'auto',
+            bottom                : 'auto',
+            marginRight           : '-50%',
+            transform             : 'translate(-50%, -50%)',
+            backgroundColor: 'rgba(0, 0, 0, .0)',
+            borderColor: 'rgba(0, 0, 0, .0)'
+          },
+          overlay : {
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, .7)'
+          }          
+        }
+      }
+      isOpen={!!router.query.postId} 
+      onRequestClose={() => router.push("/")}
+      >
         <Post postId={router.query.postId}/>
       </Modal>
     </Layout>

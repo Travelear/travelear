@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
 
 const user = {
   name: 'Chelsea Hagon',
@@ -15,11 +16,6 @@ const navigation = [
   { name: 'Teams', href: '#', current: false },
   { name: 'Directory', href: '#', current: false },
 ]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -27,7 +23,7 @@ function classNames(...classes) {
 
 export default function NavBar(){
     return (
-      <header className="w-full">
+      <nav className="w-full">
          <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
       <Popover
@@ -46,11 +42,9 @@ export default function NavBar(){
                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                   <div className="flex-shrink-0 flex items-center">
                     <a href="/">
-                      <img
-                        className="block h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                        alt="Workflow"
-                      />
+                      <h1 className="uppercase font-bold text-lg">
+                        Travelear
+                      </h1>
                     </a>
                   </div>
                 </div>
@@ -87,14 +81,6 @@ export default function NavBar(){
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                  <a
-                    href="#"
-                    className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </a>
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="flex-shrink-0 relative ml-5">
                     {({ open }) => (
@@ -119,87 +105,33 @@ export default function NavBar(){
                             static
                             className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                           >
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block py-2 px-4 text-sm text-gray-700'
-                                    )}
+                              <Menu.Item key={''}>
+                                <Link 
+                                  href={`/?profileId=213`}
+                                  as={`/profiles/213`} 
                                   >
-                                    {item.name}
-                                  </a>
-                                )}
+                                    profile
+                                </Link>
                               </Menu.Item>
-                            ))}
+
                           </Menu.Items>
                         </Transition>
                       </>
                     )}
                   </Menu>
-
                   <a
-                    href="#"
-                    className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="/posts/create"
+                    className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent hover:bg-accentdark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    New Project
+                    New Recording
                   </a>
                 </div>
               </div>
             </div>
-
-            <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
-              <div className="max-w-4xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current ? 'bg-gray-100 text-gray-900' : 'hover:bg-gray-50',
-                      'block rounded-md py-2 px-3 text-base font-medium'
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-              <div className="border-t border-gray-200 pt-4 pb-3">
-                <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
-                  <div className="flex-shrink-0">
-                    <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">{user.name}</div>
-                    <div className="text-sm font-medium text-gray-500">{user.email}</div>
-                  </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-                  {userNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </Popover.Panel>
           </>
         )}
       </Popover>
     </>
-      </header>
+      </nav>
     )
 }
