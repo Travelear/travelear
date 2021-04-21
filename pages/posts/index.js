@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import db from '../../utils/db'
+import LoopIcon from '../../components/svgs/loop'
 
 const Posts = (props) => {
 
