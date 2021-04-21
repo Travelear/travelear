@@ -8,7 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.0.0",
+    "@heroicons/react": "^1.0.1",
     "@reach/slider": "^0.13.2",
+    "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "axios": "^0.21.1",
     "firebase-admin": "^9.6.0",
@@ -21,6 +24,7 @@
     "react-modal": "^3.12.1",
     "react-qr-reader": "^2.2.1",
     "react-split-flap-effect": "^1.0.0",
+    "swr": "^0.5.5",
     "typeface-share": "^1.1.13"
   },
   "devDependencies": {

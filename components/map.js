@@ -11,7 +11,7 @@ export default function Map(){
 
     const [entries, setEntries] = useState([]);
     const [value, setValue] = useState(0);
-    const { ref, map, google } = useGoogleMaps(process.env.customKey, {
+    const { ref, map, google } = useGoogleMaps(process.env.NEXT_PUBLIC_MAP_API_KEY, {
         center: {
         lat: 37.7749, 
         lng: 122.4194

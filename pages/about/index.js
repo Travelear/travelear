@@ -2,16 +2,19 @@ export default function AboutPage(){
     return (
         <div>
             <main className="flex justify-center items-center content-center">
-                <div className="p-6 mt-20 ml-2 mr-32 w-full space-y-4">
-                    <h1 className="border-b pb-6 font-bold text-left uppercase">
-                        About Travelear
-                    </h1>
-                    <div>
-                        <p>
-                            Travelear was created in the summer of 2016
-                        </p>
+            <div className="bg-white">
+                <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+                    <div className="text-center">
+                    <h2 className="text-base font-semibold text-indigo-600 tracking-wide uppercase">About</h2>
+                    <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                        Take control of your team.
+                    </p>
+                    <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+                        Start building for free, then add a site plan to go live. Account plans unlock additional features.
+                    </p>
                     </div>
                 </div>
+            </div>
             </main>
         </div>
     )

@@ -1,105 +1,80 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router"
 import Link from 'next/link'
-import Head from 'next/head'
-
-import ProfilePage from './profiles/[profile]'
-import PostPage from './posts/[post]'
-import CreatePage from './admin/create'
-import Posts from './posts'
+import db from '../utils/db'
+import LoopIcon from '../components/svgs/loop'
+import Layout from '../components/layout'
+import Post from '../components/post'
 import Modal from 'react-modal'
-import Map from '../components/map'
-import MapPinIcon from '../components/svgs/map-pin'
 
-Modal.setAppElement("#__next")
-
-export default function Home() {
-
-  const [checkCreate, setCheckCreate] = useState(false)
-  const [checkMap, setCheckMap] = useState(false)
+export default function Home(props) {
 
   const router = useRouter()
-  const profile = '1234'
-
-  const setShowCreate = () => {
-    return setCheckCreate(prevCheck => !prevCheck)
-  }
-  
-  const setShowMap = () => {
-    return setCheckMap(prevCheck => !prevCheck)
-  } 
-  
+  const { entries } = props
 
   return (
-    <div className="flex justify-center min-h-screen">
-      <Head>
-        <title>Travelear</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="w-full flex flex-wrap">
-
-        <div className="w-full h-full bg-cloudwhite flex justify-center items-center pt-24">
-          <Posts/>
-        </div>
-
-        <div className="top-24 right-0 fixed space-y-2">
-          <div className="rounded-l-full bg-cloudwhite shadow-lg">
-              <div className="p-2 flex">
-                <div className="center-items cursor-pointer">
-                      <Link 
-                        href={`/?profile=${profile}`} 
-                        as={`/${profile}`}>
-                            <div className="flex-none w-16 h-16 p-2 relative">
-                                <img className="absolute inset-0 w-full h-full rounded-full object-cover" src={"https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/image%2F%24747021f5-a18d-495b-998d-87f8cb750d35-garett-with-mic-for-travelear-pic.jpg?alt=media&token=4c028c02-8214-45f9-8f6a-4479580a8354"}/>
-                            </div>
-                      </Link>
+    <Layout>
+      <main className="w-full flex flex-wrap p-4">
+        {entries? entries.map(post => (
+              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4" key={post.id}>
+                  <Link 
+                      href={`/?postId=${post.id}`}
+                      as={`/posts/${post.id}`} 
+                      >
+                      <div className="bg-gray-100 shadow-md rounded-xl p-4 space-y-4">
+                          <div className="w-full flex flex-row justify-between">
+                              <div className="flex-none w-8 h-8 relative">
+                                  <img className="absolute inset-0 w-full h-full rounded-full object-cover" src={"https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/image%2F%24747021f5-a18d-495b-998d-87f8cb750d35-garett-with-mic-for-travelear-pic.jpg?alt=media&token=4c028c02-8214-45f9-8f6a-4479580a8354"}/>
+                              </div>
+                              <div className="flex-none w-8 h-8 relative">
+                                  {post.isSleep? <LoopIcon/> : <div/>}
+                              </div>
+                          </div>
+                          <img className="w-32 h-32 rounded-full mx-auto object-cover" src={post.image}alt="" width="384" height="512"/>
+                          <div className="text-center">
+                              <div className="font-medium">
+                                  <div className="text-gray-800">
+                                      <p>{post.location}</p>
+                                  </div>
+                                  <div className="text-gray-500">
+                                    <p>{post.latitude}, {post.longitude}</p>
+                                  </div>
+                                  <div className="text-gray-500">
+                                      <p>Month, Day, Year</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div className="w-full flex flex-row justify-between text-xs font-light">
+                              <div className="text-gray-400 translate rotate-90">
+                                  <p>{post.id}</p>
+                              </div>
+                              <div className="text-gray-500">
+                                  <p>t-{post.duration}</p>
+                              </div>
+                          </div>
+                      </div>
+                    </Link>
                 </div>
-              </div>
-          </div>
-          <div className="rounded-l-full bg-cloudwhite shadow-lg">
-              <div className="p-2 flex">
-                <div className="center-items cursor-pointer">
-                  <button className="flex-none w-16 h-16 p-2 bg-explored relative rounded-full" onClick={setShowCreate}/>
-                </div>
-              </div>
-          </div>
-          <div className="rounded-l-full bg-cloudwhite shadow-lg">
-              <div className="p-2 flex">
-                <div className="center-items cursor-pointer">
-                  <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowMap}>
-                    <MapPinIcon/>
-                  </button>
-                </div>
-              </div>
-          </div>
-        </div>
-
-        <div className="w-full fixed t-0 p-4 bg-cloudwhite">
-            <input type="search" className="form-input px-4 py-3 w-full border-gray-50" placeholder="Search"/>
-        </div>
-
+          )): <div></div>}
       </main>
-      <Modal
-        isOpen={!!router.query.profile}
-        onRequestClose={() => router.push("/")}>
-          <div className="h-full flex justify-center items-center">
-            <ProfilePage/>
-          </div>
+      <Modal isOpen={!!router.query.postId} onRequestClose={() => router.push("/")}>
+        <Post postId={router.query.postId}/>
       </Modal>
-      <Modal
-        isOpen={!!router.query.post}
-        onRequestClose={() => router.push("/")}>
-          <div className="h-full flex justify-center items-center">
-            <PostPage/>
-          </div>
-      </Modal>
-      <Modal
-        isOpen={checkCreate}
-        onRequestClose={setShowCreate}>
-          <div className="h-full flex justify-center items-center">
-            <CreatePage/>
-          </div>
-      </Modal>
-    </div>
+    </Layout>
   )
+}
+
+export const getStaticProps = async () => {
+  const query = await db.collection('tracks-published').get()
+  const entries = query.docs.map(entry => (
+    JSON.parse(JSON.stringify({
+    id: entry.id,
+    ...entry.data()
+    }))
+  ));
+  return {
+    props: { 
+      entries 
+    },
+    revalidate: 10
+  }
 }
