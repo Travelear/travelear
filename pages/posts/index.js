@@ -9,7 +9,7 @@ const Posts = (props) => {
     <div className="w-5/6 md:w-3/4 lg:w-1/2 xl:w-1/3 h-full">
         <div className="flex flex-wrap">
             <div>
-              {entries.map(post => (
+              {entries? entries.map(post => (
                 <div className="w-full p-4" key={post.id}>
                     <Link 
                         href={`/?post=${post.id}`} 
@@ -50,7 +50,7 @@ const Posts = (props) => {
 
                     </Link>
                 </div>
-                ))}
+              )): <div></div>}
             </div>
         </div>
     </div>
