@@ -8,7 +8,7 @@ const Posts = (props) => {
   return (
     <div className="w-5/6 md:w-3/4 lg:w-1/2 xl:w-1/3 h-full">
         <div className="flex flex-wrap">
-            {/* <div>
+            <div>
               {entries.map(post => (
                 <div className="w-full p-4" key={post.id}>
                     <Link 
@@ -51,7 +51,7 @@ const Posts = (props) => {
                     </Link>
                 </div>
                 ))}
-            </div> */}
+            </div>
         </div>
     </div>
   );

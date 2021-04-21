@@ -25,7 +25,7 @@ export default function Home() {
     return setCheckCreate(prevCheck => !prevCheck)
   }
   
-  const setShowkMap = () => {
+  const setShowMap = () => {
     return setCheckMap(prevCheck => !prevCheck)
   } 
   
@@ -66,7 +66,7 @@ export default function Home() {
           <div className="rounded-l-full bg-cloudwhite shadow-lg">
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
-                  <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowkMap}>
+                  <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowMap}>
                     <MapPinIcon/>
                   </button>
                 </div>
