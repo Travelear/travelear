@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react"
 import Link from 'next/link'
-import PlayButton from '../../pages/components/svgs/play'
-import BookMark from '../components/svgs/bookmark'
-import VolumeUp from '../../pages/components/svgs/volume-up'
-import VolumeDown from '../../pages/components/svgs/volume-down'
+import PlayButton from './svgs/play'
+import BookMark from './svgs/bookmark'
+import VolumeUp from './svgs/volume-up'
+import VolumeDown from './svgs/volume-down'
 import {
   SliderInput,
   SliderTrack,
@@ -25,7 +25,7 @@ export default function Player(){
   })
 
   const profile = '1234'
-  const recording = '1234'
+  const post = '1234'
 
   const startTimer = () => {
     setState({

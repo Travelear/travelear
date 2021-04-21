@@ -236,7 +236,7 @@ export default function Map(){
     return;
     }
     // GET DATA
-    const res = await axios.get('/api/recordings');
+    const res = await axios.get('/api/posts');
     setEntries(res.data.entriesData);
 
     // ZOOM LISTENER
@@ -250,9 +250,9 @@ export default function Map(){
 
   if (map) {
       for (let i = 0; i < entries.length-1; i++) {
-        const recording = entries[i]
+        const post = entries[i]
         const marker = new google.maps.Marker({ 
-            position: { lat: Number(recording.latitude), lng: Number(recording.longitude) }, 
+            position: { lat: Number(post.latitude), lng: Number(post.longitude) }, 
             map: map,
             icon: {
                 path: google.maps.SymbolPath.CIRCLE,
@@ -264,9 +264,9 @@ export default function Map(){
                 strokeWeight: 10,
                 scale: 10,
               },
-            title: recording[0]
+            title: post[0]
         })
-            marker.addListener("click", () => {router.push(`/?recording=${recording.id}`,`/r/${recording.id}`)}, {
+            marker.addListener("click", () => {router.push(`/?post=${post.id}`,`/r/${post.id}`)}, {
                 passive: true
               });
         }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import db from '../../utils/db';
+import db from '../../../utils/db'
 
-const Recording = (props) => {
+const post = (props) => {
   const { entry } = props;
   const router = useRouter()
   if (router.isFallback) {
@@ -45,7 +45,7 @@ export const getStaticProps = async (context) => {
   if (entry.length) {
     return {
       props: {
-        entry: entry[0]
+        entry: JSON.parse(JSON.stringify(entry[0]))
       }
     }
   } else {
@@ -55,4 +55,4 @@ export const getStaticProps = async (context) => {
   }
 }
 
-export default Recording;
+export default post;

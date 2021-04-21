@@ -1,4 +1,4 @@
-export const Toggle = (props) => (<div>
+const Toggle = (props) => (<div>
     <div className="bg-gray-200 rounded-full w-auto">
         <div className="bg-gray-300 rounded-full w-full">
             {props.onoff? 
@@ -8,3 +8,5 @@ export const Toggle = (props) => (<div>
         </div>
     </div> 
 </div>)
+
+export default Toggle;

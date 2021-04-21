@@ -4,17 +4,12 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import ProfilePage from './profiles/[profile]'
-import RecordingPage from './recordings/[recording]'
+import PostPage from './posts/[post]'
 import CreatePage from './admin/create'
+import Posts from './posts'
 import Modal from 'react-modal'
-import List from './components/list'
-import Map from './components/map'
-import MapIcon from './components/svgs/map'
-import ListIcon from './components/svgs/list'
-import MicrophoneIcon from './components/svgs/microphone'
-
-// import VolumeUp from './components/svgs/volume-up'
-// import VolumeDown from './components/svgs/volume-down'
+import Map from '../components/map'
+import MapPinIcon from '../components/svgs/map-pin'
 
 Modal.setAppElement("#__next")
 
@@ -44,7 +39,7 @@ export default function Home() {
       <main className="w-full flex flex-wrap">
 
         <div className="w-full h-full bg-cloudwhite flex justify-center items-center pt-24">
-        <List/>
+          <Posts/>
         </div>
 
         <div className="top-24 right-0 fixed space-y-2">
@@ -64,9 +59,7 @@ export default function Home() {
           <div className="rounded-l-full bg-cloudwhite shadow-lg">
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
-                  <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowCreate}>
-                    <MicrophoneIcon/>
-                  </button>
+                  <button className="flex-none w-16 h-16 p-2 bg-explored relative rounded-full" onClick={setShowCreate}/>
                 </div>
               </div>
           </div>
@@ -74,7 +67,7 @@ export default function Home() {
               <div className="p-2 flex">
                 <div className="center-items cursor-pointer">
                   <button className="flex-none w-16 h-16 p-2 relative rounded-full" onClick={setShowkMap}>
-                    <MapIcon/>
+                    <MapPinIcon/>
                   </button>
                 </div>
               </div>
@@ -94,10 +87,10 @@ export default function Home() {
           </div>
       </Modal>
       <Modal
-        isOpen={!!router.query.recording}
+        isOpen={!!router.query.post}
         onRequestClose={() => router.push("/")}>
           <div className="h-full flex justify-center items-center">
-            <RecordingPage/>
+            <PostPage/>
           </div>
       </Modal>
       <Modal

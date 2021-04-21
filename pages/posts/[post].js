@@ -1,23 +1,14 @@
-// import { useRef, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
-// import Link from 'next/link'
-import Player from '../components/player'
-// import { FlapDisplay, Presets } from 'react-split-flap-effect'
-import axios from 'axios';
+import Player from '../../components/player'
+import db from '../../utils/db';
 var QRCode = require('qrcode.react')
 
-const RecordingPage = () => {
+const PostPage = (props) => {
 
-  const [entry, setEntry] = useState();
+  const { entry } = props;
   const router = useRouter()
-  const { recording } = router.query
 
-  useEffect(async () => {
-    const res = await axios.get(`/api/recording/${recording}`);
-    console.log(recording)
-    setEntry(res.data);
-  }, []);
+  console.log(entry)
 
   if (router.isFallback) {
     return (
@@ -51,4 +42,34 @@ const RecordingPage = () => {
   }
 };
 
-export default RecordingPage;
+export const getStaticPaths = async () => {
+  const entries = await db.collection('tracks-published').where("isPublic", "==", true).get()
+  const paths = entries.docs.map(entry => ({
+    params: {
+      post: entry.data().id
+    }
+  }));
+  return {
+    paths,
+    fallback: true
+  }
+}
+
+export const getStaticProps = async (context) => {
+  const { post } = context.params;
+  const res = await db.collection('tracks-published').where("id", "==", post).get()
+  const entry = res.docs.map(entry => entry.data());
+  if (entry.length) {
+    return {
+      props: {
+        entry: JSON.parse(JSON.stringify(entry[0]))
+      }
+    }
+  } else {
+    return {
+      props: {}
+    }
+  }
+}
+
+export default PostPage;

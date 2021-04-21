@@ -7,8 +7,7 @@ const Admin = () => {
     const [entries, setEntries] = useState([]);
 
     useEffect(async () => {
-      const res = await axios.get('/api/recordings');
-      console.log(res)
+      const res = await axios.get('/api/posts');
       setEntries(res.data.entriesData);
     }, []);
 
@@ -20,12 +19,12 @@ const Admin = () => {
                         Admin
                     </h1>
                     <div>
-                        {entries.map(recording => (
-                            <div key={recording.id}>
-                            <Link href={`/admin/edit/${recording.id}`}>
+                        {entries.map(post => (
+                            <div key={post.id}>
+                            <Link href={`/admin/edit/${post.id}`}>
                                 <div>
-                                <p>{recording.name}</p>
-                                <p>{recording.authorName}</p>
+                                <p>{post.name}</p>
+                                <p>{post.authorName}</p>
                                 </div>
                             </Link>
                             <br/>

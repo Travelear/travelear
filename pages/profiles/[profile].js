@@ -19,7 +19,7 @@ export default function ProfilePage(){
                         Travelear Chief Audio Engineer
                     </div>
                     <div className="text-gray-500">
-                        52 recordings | Member since 2016
+                        52 posts | Member since 2016
                     </div>
                 </div>
             </div>
