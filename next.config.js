@@ -1,5 +1,5 @@
 module.exports = {
     env: {
-      MapApiKey: process.env.MAP_API_KEY,
+      MapApiKey: process.env.NEXT_PUBLIC_MAP_API_KEY,
     },
   }
