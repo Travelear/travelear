@@ -1,16 +1,19 @@
-import React, { useState } from "react"
+import React from "react"
 import NavBar from "./navbar";
 import Footer from "./footer";
-import Map from "./map"
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-white">
+          <header className="sticky top-0 z-10">
           <NavBar/>
-          <main className="w-full">
+          </header>
+          <main className="flex-grow">
             {children}
           </main>
+          <footer>
           <Footer/>
+          </footer>
     </div>
   )
 }

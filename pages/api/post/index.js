@@ -3,7 +3,7 @@ import db from '../../../utils/db';
 export default async (req, res) => {
     try {
       const { id } = req.body;
-      const entries = await db.collection('tracks-published').get();
+      const entries = await db.collection('tracks-published').where('isPublic', '==', true).get();
       const entriesData = entries.docs.map(entry => entry.data());
   
       if (entriesData.some(entry => entry.id === id)) {

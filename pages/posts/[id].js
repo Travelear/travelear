@@ -43,7 +43,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const doc = await db.collection('tracks-published').get();
+  const doc = await db.collection('tracks-published').where('isPublic', '==', true).get();
   return {
     paths: doc.docs.map((post) => {
       return {
