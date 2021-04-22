@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useRouter } from "next/router"
 import Link from 'next/link'
 import db from '../utils/db'
@@ -5,23 +6,27 @@ import LoopIcon from '../components/svgs/loop'
 import Layout from '../components/layout'
 import Post from '../components/post'
 import Modal from 'react-modal'
-import { backgroundOpacity } from "tailwindcss/defaultTheme"
+
+Modal.setAppElement("#__next")
 
 export default function Home(props) {
 
+  const [post, setPost] = useState({})
   const router = useRouter()
-  const { entries } = props
+  const { posts } = props
+
 
   return (
     <Layout>
       <main className="w-full flex flex-wrap p-4">
-        {entries? entries.map(post => (
+        {posts? posts.map(post => (
               <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 bg-white" key={post.id}>
                   <Link 
-                      href={`/?postId=${post.id}`}
-                      as={`/posts/${post.id}`} 
+                      href={`/?id=${post.id}`}
+                      as={`/posts/${post.id}`}
                       >
-                      <div className="bg-gray-100 shadow-md rounded-xl p-4 space-y-4">
+                        <a onClick={()=>setPost(post)}>
+                        <div className="bg-gray-100 shadow-md rounded-xl p-4 space-y-4">
                           <div className="w-full flex flex-row justify-between">
                               <div className="flex-none w-8 h-8 relative">
                                   <img className="absolute inset-0 w-full h-full rounded-full object-cover" src={"https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/image%2F%24747021f5-a18d-495b-998d-87f8cb750d35-garett-with-mic-for-travelear-pic.jpg?alt=media&token=4c028c02-8214-45f9-8f6a-4479580a8354"}/>
@@ -52,7 +57,8 @@ export default function Home(props) {
                                   <p>t-{post.duration}</p>
                               </div>
                           </div>
-                      </div>
+                        </div>
+                        </a>
                     </Link>
                 </div>
           )): <div></div>}
@@ -79,10 +85,18 @@ export default function Home(props) {
           }          
         }
       }
-      isOpen={!!router.query.postId} 
+      isOpen={!!router.query.id} 
       onRequestClose={() => router.push("/")}
       >
-        <Post postId={router.query.postId}/>
+        <Post 
+          id={router.query.id}
+          name={post.name}
+          location={post.location}
+          latitude={post.latitude}
+          longitude={post.longitude}
+          image={post.image}
+          creatorName={post.creatorName}
+        />
       </Modal>
     </Layout>
   )
@@ -90,7 +104,7 @@ export default function Home(props) {
 
 export const getStaticProps = async () => {
   const query = await db.collection('tracks-published').get()
-  const entries = query.docs.map(entry => (
+  const posts = query.docs.map(entry => (
     JSON.parse(JSON.stringify({
     id: entry.id,
     ...entry.data()
@@ -98,7 +112,7 @@ export const getStaticProps = async () => {
   ));
   return {
     props: { 
-      entries 
+      posts 
     },
     revalidate: 10
   }

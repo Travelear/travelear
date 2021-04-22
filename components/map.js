@@ -266,7 +266,7 @@ export default function Map(){
               },
             title: post[0]
         })
-            marker.addListener("click", () => {router.push(`/?postId=${post.id}`,`/posts/${post.id}`)}, {
+            marker.addListener("click", () => {router.push(`/?id=${post.id}`,`/posts/${post.id}`)}, {
                 passive: true
               });
         }

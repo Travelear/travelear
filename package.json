@@ -24,7 +24,6 @@
     "react-modal": "^3.12.1",
     "react-qr-reader": "^2.2.1",
     "react-split-flap-effect": "^1.0.0",
-    "swr": "^0.5.5",
     "typeface-share": "^1.1.13"
   },
   "devDependencies": {
