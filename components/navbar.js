@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import Link from 'next/link'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
@@ -96,16 +97,17 @@ export default function NavBar(){
                             >
                               <Menu.Item>
                                 {({ active }) => (
-                                  <a
-                                  href={`/?profile=${profile.id}`}
-                                  as={`/profiles/${profile.id}`}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    Your Profile
-                                  </a>
+                                  <Link
+                                    href={`/?profileId=${profile.id}`}
+                                    as={`/profiles/${profile.id}`}
+                                    >
+                                    <a className={classNames(
+                                        active ? 'bg-gray-100' : '',
+                                        'block px-4 py-2 text-sm text-gray-700'
+                                      )}>
+                                        Your Profile
+                                    </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                               <Menu.Item>
@@ -189,12 +191,14 @@ export default function NavBar(){
                     </button>
                   </div>
                   <div className="mt-3 space-y-1">
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                    <Link
+                      href={`/?profileId=${profile.id}`}
+                      as={`/profiles/${profile.id}`}
                     >
+                      <a className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
                       Your Profile
-                    </a>
+                      </a>
+                    </Link>
                     <a
                       href="#"
                       className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
