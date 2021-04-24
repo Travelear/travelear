@@ -35,6 +35,8 @@ export default function Home(props) {
     }          
   }
 
+  console.log(post.file)
+
 
   return (
     <Layout>
@@ -64,6 +66,7 @@ export default function Home(props) {
           latitude={post.latitude}
           longitude={post.longitude}
           image={post.image}
+          file={post.file}
           creatorName={post.creatorName}
         />
       </Modal>

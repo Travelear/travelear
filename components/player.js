@@ -13,19 +13,21 @@ import {
 import "@reach/slider/styles.css";
 
 
-const testFile = 'https://firebasestorage.googleapis.com/v0/b/travelear-fc8b2.appspot.com/o/users%2FEVwm7DMBdFPXAE0wn41ijYErSjW2%2Faudio%2FElephant-Seal-Beach_San-Simeon-California_192_020417.mp3?alt=media&token=e7774d74-6151-42ef-b526-91ec7d51c5a5'
+export default function Player(props){
 
-export default function Player(){
+  let audio = null
 
   const [state, setState] = useState({
     timerOn: false,
     timerStart: 0,
     timerTime: 0,
     currentTime: 0,
+    isPlaying: false
   })
 
-  const profile = '1234'
-  const post = '1234'
+  const onEnded = (id) => {
+    audio.play()
+  }
 
   const startTimer = () => {
     setState({
@@ -101,6 +103,22 @@ export default function Player(){
   let minutes = ("0" + Math.floor((timerTime / 60000) % 60)).slice(-2);
   let hours = ("0" + Math.floor((timerTime / 3600000) % 60)).slice(-2);
 
+  const handlePlay = () => {
+    if (audio.paused) {
+      audio.play()
+      setState({
+        ...state,
+        isPlaying:true
+      })
+    } else {
+      audio.pause();
+      setState({
+        ...state,
+        isPlaying:false
+      })
+    }
+  }
+
   return (
     <div className="w-full h-full text-black">
         <div className="flex flex-wrap justify-center items-center">
@@ -118,14 +136,20 @@ export default function Player(){
                 <div>
                   <p>{hours}:{minutes}:{seconds}</p>
                 </div>
-                <div className="w-16 h-16 font-bold center-items cursor-pointer">
-                  <PlayButton/>
+                <div className="w-16 h-16 font-bold center-items cursor-pointer" onClick={handlePlay}>
+                  {state.isPlaying ? <PlayButton/>: <PlayButton/>}
                 </div>
                 <div>
                   <p>{hours}:{minutes}:{seconds}</p>
                 </div>
               </div>
         </div>
+        {props.file && <audio
+          onEnded={() => onEnded(props.id)}
+          ref={audioRef => audio = audioRef}
+          src={props.file}
+          autoPlay={false}
+        />}
     </div>
   );
 }
