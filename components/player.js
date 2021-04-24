@@ -1,9 +1,6 @@
-import React, { useRef, useEffect, useState } from "react"
-import Link from 'next/link'
+import React, { useState } from "react"
 import PlayButton from './svgs/play'
-import BookMark from './svgs/bookmark'
-import VolumeUp from './svgs/volume-up'
-import VolumeDown from './svgs/volume-down'
+import PauseButton from './svgs/pause'
 import {
   SliderInput,
   SliderTrack,
@@ -25,7 +22,7 @@ export default function Player(props){
     isPlaying: false
   })
 
-  const onEnded = (id) => {
+  const onEnded = () => {
     audio.play()
   }
 
@@ -88,7 +85,7 @@ export default function Player(props){
                   <p>{secondsToTime(state.currentTime)}</p>
                 </div>
                 <div className="w-16 h-16 font-bold center-items cursor-pointer" onClick={handlePlay}>
-                  {state.isPlaying ? <PlayButton/>: <PlayButton/>}
+                  {state.isPlaying ? <PauseButton/>: <PlayButton/>}
                 </div>
                 <div className="w-16">
                   <p>{props.duration}</p>
@@ -97,7 +94,6 @@ export default function Player(props){
         </div>
         {props.file && <audio
           onTimeUpdate={onTimeUpdate}
-          onEnded={() => onEnded(props.id)}
           ref={audioRef => audio = audioRef}
           src={props.file}
           autoPlay={false}
