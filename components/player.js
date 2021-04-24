@@ -29,44 +29,15 @@ export default function Player(props){
     audio.play()
   }
 
-  const startTimer = () => {
+  const onTimeUpdate = (e) => {
     setState({
-      timerOn: true,
-      timerTime: state.timerTime,
-      timerStart: state.timerTime
-    });
-    timer = setInterval(() => {
-      const newTime = state.timerTime - 10;
-      if (newTime >= 0) {
-        setState({
-          timerTime: newTime
-        });
-      } else {
-        clearInterval(timer);
-        setState({ timerOn: false });
-        alert("ended");
-      }
-    }, 10);
-  };
-
-  const stopTimer = () => {
-    clearInterval(timer);
-    setState({ timerOn: false });
-  };
-  const resetTimer = () => {
-    if (state.timerOn === false) {
-      setState({
-        timerTime: state.timerStart
-      });
-    }
-  };
-
-  const onVolumeChange = (volume) => {
-    setState({...state, volume: volume})
+      ...state, 
+      currentTime: Math.floor(e.target.currentTime)
+    })
   }
 
-  const onCurrentTimeChange = (currentTime) => {
-    setState({...state, currentTime: currentTime})
+  const onTimeSliderChange = (nextTime) => {
+      audio.currentTime = nextTime
   }
 
   const timeToSeconds = (str) => {
@@ -78,30 +49,6 @@ export default function Player(props){
     }
     return s;
   }
-
-  const adjustTimer = (input) => {
-    const { timerTime, timerOn } = state;
-    if (!timerOn) {
-      if (input === "incHours" && timerTime + 3600000 < 216000000) {
-        setState({ timerTime: timerTime + 3600000 });
-      } else if (input === "decHours" && timerTime - 3600000 >= 0) {
-        setState({ timerTime: timerTime - 3600000 });
-      } else if (input === "incMinutes" && timerTime + 60000 < 216000000) {
-        setState({ timerTime: timerTime + 60000 });
-      } else if (input === "decMinutes" && timerTime - 60000 >= 0) {
-        setState({ timerTime: timerTime - 60000 });
-      } else if (input === "incSeconds" && timerTime + 1000 < 216000000) {
-        setState({ timerTime: timerTime + 1000 });
-      } else if (input === "decSeconds" && timerTime - 1000 >= 0) {
-        setState({ timerTime: timerTime - 1000 });
-      }
-    }
-  };
-
-  const { timerTime, timerStart, timerOn } = state;
-  let seconds = ("0" + (Math.floor((timerTime / 1000) % 60) % 60)).slice(-2);
-  let minutes = ("0" + Math.floor((timerTime / 60000) % 60)).slice(-2);
-  let hours = ("0" + Math.floor((timerTime / 3600000) % 60)).slice(-2);
 
   const handlePlay = () => {
     if (audio.paused) {
@@ -119,12 +66,16 @@ export default function Player(props){
     }
   }
 
+  const secondsToTime = (time) => {
+    return `${Math.floor((time % 3600) / 60)}:${Math.floor(time % 60)}`
+  }
+
   return (
     <div className="w-full h-full text-black">
         <div className="flex flex-wrap justify-center items-center">
               <div className="w-full h-12 flex justify-center items-center px-4">
                 <div className="w-full">
-                  <SliderInput min={0} max={100} step={1} orientation={"horizontal"} value={state.currentTime} onChange={onCurrentTimeChange}>
+                  <SliderInput min={0} max={timeToSeconds(props.duration)} step={1} orientation={"horizontal"} value={state.currentTime} onChange={onTimeSliderChange}>
                       <SliderTrack className="slider-track">
                         <SliderRange className="slider-range"/>
                         <SliderHandle className="slider-handle"/>
@@ -133,18 +84,19 @@ export default function Player(props){
                 </div>
               </div>
               <div className="w-full flex flex-row h-16 items-center justify-between px-4 pb-4">
-                <div>
-                  <p>{hours}:{minutes}:{seconds}</p>
+                <div className="w-16">
+                  <p>{secondsToTime(state.currentTime)}</p>
                 </div>
                 <div className="w-16 h-16 font-bold center-items cursor-pointer" onClick={handlePlay}>
                   {state.isPlaying ? <PlayButton/>: <PlayButton/>}
                 </div>
-                <div>
-                  <p>{hours}:{minutes}:{seconds}</p>
+                <div className="w-16">
+                  <p>{props.duration}</p>
                 </div>
               </div>
         </div>
         {props.file && <audio
+          onTimeUpdate={onTimeUpdate}
           onEnded={() => onEnded(props.id)}
           ref={audioRef => audio = audioRef}
           src={props.file}

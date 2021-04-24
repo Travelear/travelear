@@ -35,9 +35,6 @@ export default function Home(props) {
     }          
   }
 
-  console.log(post.file)
-
-
   return (
     <Layout>
       <main className="w-full flex flex-wrap p-4">
@@ -67,6 +64,7 @@ export default function Home(props) {
           longitude={post.longitude}
           image={post.image}
           file={post.file}
+          duration={post.duration}
           creatorName={post.creatorName}
         />
       </Modal>

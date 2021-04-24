@@ -2,7 +2,7 @@ import Player from './player'
 
 var QRCode = require('qrcode.react')
 
-export default function Post({postId, name, location, latitude, longitude, image, file, creatorName}){ 
+export default function Post({postId, name, location, latitude, longitude, image, file, duration, creatorName}){ 
     return (
         <div className="w-full h-full bg-gray-100 rounded-lg shadow-lg">
             <div className="flex flex-col justify-items-center text-black border-black border-1">
@@ -31,7 +31,7 @@ export default function Post({postId, name, location, latitude, longitude, image
                     </div>
                 </div>
                 <div className="w-full px-4 rounded-b-lg">
-                    <Player file={file} id={postId}/>
+                    <Player file={file} id={postId} duration={duration}/>
                 </div>
             </div>
         </div>
