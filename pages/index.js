@@ -11,9 +11,29 @@ Modal.setAppElement("#__next")
 
 export default function Home(props) {
 
-  const [post, setPost] = useState({})
   const router = useRouter()
+  const [post, setPost] = useState({})
   const { posts } = props
+
+  const modalStyle = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+      backgroundColor: 'rgba(0, 0, 0, .0)',
+      borderColor: 'rgba(0, 0, 0, .0)'
+    },
+    overlay : {
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, .7)'
+    }          
+  }
 
 
   return (
@@ -22,7 +42,7 @@ export default function Home(props) {
         {posts? posts.map(post => (
               <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 bg-white" key={post.id}>
                   <Link 
-                      href={`/?id=${post.id}`}
+                      href={`/?postId=${post.id}`}
                       as={`/posts/${post.id}`}
                       >
                         <a onClick={()=>setPost(post)}>
@@ -64,32 +84,12 @@ export default function Home(props) {
           )): <div></div>}
       </main>
       <Modal
-      style={
-        {
-          content : {
-            top                   : '50%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            transform             : 'translate(-50%, -50%)',
-            backgroundColor: 'rgba(0, 0, 0, .0)',
-            borderColor: 'rgba(0, 0, 0, .0)'
-          },
-          overlay : {
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, .7)'
-          }          
-        }
-      }
-      isOpen={!!router.query.id} 
+      style={modalStyle}
+      isOpen={!!router.query.postId} 
       onRequestClose={() => router.push("/")}
       >
         <Post 
-          id={router.query.id}
+          postId={router.query.postId}
           name={post.name}
           location={post.location}
           latitude={post.latitude}

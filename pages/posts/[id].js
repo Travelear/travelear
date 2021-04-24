@@ -12,7 +12,7 @@ const PostPage = (props) => {
       <div className="w-full flex justify-center items-center">
         <div className="w-256 p-8">
           <Post 
-          id={post.id}
+          postId={post.id}
           name={post.name}
           location={post.location}
           latitude={post.latitude}

@@ -8,6 +8,11 @@ function classNames(...classes) {
 }
 
 export default function NavBar(){
+
+    const profile = {
+      id: '123'
+    }
+
     return (
       <nav className="w-full bg-white">
         <Disclosure as="nav" className="bg-white shadow">
@@ -19,7 +24,7 @@ export default function NavBar(){
                     <div className="flex-shrink-0 flex items-center">
                       <a
                         href="/"
-                        className="text-primary text-lg font-medium"
+                        className="text-3xl font-extrabold text-gray-900"
                       >
                         Travelear
                       </a>
@@ -92,7 +97,8 @@ export default function NavBar(){
                               <Menu.Item>
                                 {({ active }) => (
                                   <a
-                                    href="#"
+                                  href={`/?profile=${profile.id}`}
+                                  as={`/profiles/${profile.id}`}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -105,7 +111,7 @@ export default function NavBar(){
                               <Menu.Item>
                                 {({ active }) => (
                                   <a
-                                    href="#"
+                                    href="/settings"
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -118,7 +124,7 @@ export default function NavBar(){
                               <Menu.Item>
                                 {({ active }) => (
                                   <a
-                                    href="#"
+                                    href="/signin"
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
