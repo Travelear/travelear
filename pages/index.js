@@ -66,6 +66,7 @@ export default function Home(props) {
           file={post.file}
           duration={post.duration}
           creatorName={post.creatorName}
+          isSleep={post.isSleep}
         />
       </Modal>
     </Layout>

@@ -22,10 +22,6 @@ export default function Player(props){
     isPlaying: false
   })
 
-  const onEnded = () => {
-    audio.play()
-  }
-
   const onTimeUpdate = (e) => {
     setState({
       ...state, 
@@ -84,18 +80,19 @@ export default function Player(props){
                 </div>
               </div>
               <div className="w-full flex flex-row h-16 items-center justify-between px-4 pb-4">
-                <div className="w-16">
+                <div className="w-16 text-left">
                   <p>{secondsToTime(state.currentTime)}</p>
                 </div>
                 <div className="w-16 h-16 font-bold center-items cursor-pointer" onClick={handlePlay}>
                   {state.isPlaying ? <PauseButton/>: <PlayButton/>}
                 </div>
-                <div className="w-16">
+                <div className="w-16 text-right">
                   <p>{props.duration}</p>
                 </div>
               </div>
         </div>
         {props.file && <audio
+          loop={props.isSleep}
           onTimeUpdate={onTimeUpdate}
           ref={audioRef => audio = audioRef}
           src={props.file}

@@ -19,6 +19,7 @@ const PostPage = (props) => {
           longitude={post.longitude}
           image={post.image}
           creatorName={post.creatorName}
+          isSleep={post.isSleep}
           />
         </div>
       </div>
