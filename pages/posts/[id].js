@@ -18,6 +18,8 @@ const PostPage = (props) => {
           latitude={post.latitude}
           longitude={post.longitude}
           image={post.image}
+          file={post.file}
+          duration={post.duration}
           creatorName={post.creatorName}
           isSleep={post.isSleep}
           />
