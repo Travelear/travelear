@@ -5,16 +5,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#0D1319', // dark blue
-        primarylight: '#1C2833', // medium blue
-        secondary: '#E74C3C', // red
-        secondarydark: '#9A2216', // dark red
-        calltoaction: '#fbbf24',
-        calltoactiondark: '#C99100',
-        calltoactiontext: '#FFF6E0',
-        accent: '#14B1FF',
-        accentdark: '#0C6B77',
-        accenttext: '#15bfd3',
+        blackpearl: '#0D1319',
+        cinnabar: '#E74C3C',
+        mandarianorange: '#9A2216',
+        moonyellow: '#fbbf24',
+        darkgoldenrod: '#C99100',
+        earlydawn: '#FFF6E0',
+        deepskyblue: '#14B1FF',
+        bluelagoon: '#0C6B77',
+        irisblue: '#15bfd3',
         success: '#3cc13b',
         successtext: '#3cc13b',
         warning: '#f3bb1c',
@@ -22,7 +21,6 @@ module.exports = {
         error: '#f03738',
         errortext: '#f03738',
         divider: '#091b34',
-        background: '#FFFFFF',
         surface: '#F7FBFC',
       }
     },

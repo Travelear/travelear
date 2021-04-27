@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
 import { useGoogleMaps } from "react-hook-google-maps"
-import ZoomOut from './svgs/zoom-out'
-import ZoomIn from './svgs/zoom-in'
+import ZoomOut from '../../components/svgs/zoom-out'
+import ZoomIn from '../../components/svgs/zoom-in'
 import axios from 'axios'
 
-export default function Map(){
+export default function ExplorePage(){
 
     const router = useRouter()
 

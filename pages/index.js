@@ -37,9 +37,11 @@ export default function Home(props) {
 
   return (
     <Layout>
-      <main className="w-full flex flex-wrap p-4">
+      <div>
+        {/* BROWSE */}
+        <div className="w-full flex flex-wrap p-2">
         {posts? posts.map(post => (
-              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 2xl:w-1/6 p-4 bg-white" key={post.id}>
+              <div className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 p-4 bg-white" key={post.id}>
                   <Link 
                       href={`/?postId=${post.id}`}
                       as={`/posts/${post.id}`}
@@ -50,7 +52,9 @@ export default function Home(props) {
                     </Link>
                 </div>
           )): <div></div>}
-      </main>
+        </div>
+      </div>
+
       <Modal
       style={modalStyle}
       isOpen={!!router.query.postId} 
@@ -69,6 +73,7 @@ export default function Home(props) {
           isSleep={post.isSleep}
         />
       </Modal>
+      
     </Layout>
   )
 }

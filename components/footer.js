@@ -51,7 +51,7 @@ const navigation = [
 
 export default function Footer(){
     return (
-        <div className="bg-white">
+        <div className="bg-white border-t">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <div className="m-2">
             <p className="text-center text-base text-gray-400">&copy; 2021 kaimo, llc. All rights reserved.</p>

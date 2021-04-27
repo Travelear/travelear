@@ -1,222 +1,90 @@
-import { Fragment } from 'react'
-import Link from 'next/link'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { SearchIcon } from '@heroicons/react/solid'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { PlusIcon as PlusIconOutline } from '@heroicons/react/outline'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function NavBar(){
-
-    const profile = {
-      id: '123'
-    }
-
+export default function NavBar(props){
+    const loggedIn = props.loggedIn
     return (
-      <nav className="w-full bg-white">
-        <Disclosure as="nav" className="bg-white shadow">
-          {({ open }) => (
-            <>
-              <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-                <div className="flex justify-between h-16">
-                  <div className="flex px-2 lg:px-0">
-                    <div className="flex-shrink-0 flex items-center">
-                      <a
-                        href="/"
-                        className="text-3xl font-extrabold text-gray-900"
-                      >
-                        Travelear
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                    <div className="max-w-lg w-full lg:max-w-xs">
-                      <label htmlFor="search" className="sr-only">
-                        Search
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                        </div>
+      <div className="w-full">
+        {loggedIn?
+        <div className="bg-surface px-8 py-4 border-b border flex justify-between items-center">
+          <a href="/">
+              <div className="font-extrabold text-4xl text-blackpearl">
+                {props.title}
+              </div>
+            </a>
+          <div className="flex flex-row space-x-6 items-center">
+            <a
+            href="/create"
+            className="inline-flex items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-cinnabar hover:bg-mandarianorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              <PlusIconOutline className="h-6 w-6" aria-hidden="true" />
+            </a>
+            <a href="profiles/123">
+            <img
+              className="inline-block h-14 w-14 rounded-full"
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              alt=""
+            />
+            </a>
+          </div>
+        </div>
+        : 
+        <div className="pt-10 bg-blackpearl sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden pb-12">
+        <div className="mx-auto max-w-7xl lg:px-8">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+            <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
+              <div className="lg:py-24">
+                <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                  <span className="block">Listen to the World</span>
+                  <span className="block text-cinnabar">Lend your ears</span>
+                </h1>
+                <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                  Soundscapes presented by content creators from all over the world.
+                </p>
+                <div className="mt-10 sm:mt-12">
+                  <form action="#" className="sm:max-w-xl sm:mx-auto lg:mx-0">
+                    <div className="sm:flex">
+                      <div className="min-w-0 flex-1">
+                        <label htmlFor="email" className="sr-only">
+                          Email address
+                        </label>
                         <input
-                          id="search"
-                          name="search"
-                          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          placeholder="Search"
-                          type="search"
+                          id="email"
+                          type="email"
+                          placeholder="Enter your email"
+                          className="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
                         />
                       </div>
+                      <div className="mt-3 sm:mt-0 sm:ml-3">
+                        <button
+                          type="submit"
+                          className="block w-full py-3 px-4 rounded-md shadow bg-cinnabar text-white font-medium hover:bg-mandarianorange focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
+                        >
+                          Let's Go!
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center lg:hidden">
-                    {/* Mobile menu button */}
-                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                      <span className="sr-only">Open main menu</span>
-                      {open ? (
-                        <XIcon className="block h-6 w-6" aria-hidden="true" />
-                      ) : (
-                        <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                      )}
-                    </Disclosure.Button>
-                  </div>
-                  <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                    <button className="flex-shrink-0 bg-white p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-
-                    {/* Profile dropdown */}
-                    <Menu as="div" className="ml-4 relative flex-shrink-0">
-                      {({ open }) => (
-                        <>
-                          <div>
-                            <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                              <span className="sr-only">Open user menu</span>
-                              <img
-                                className="h-8 w-8 rounded-full"
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt=""
-                              />
-                            </Menu.Button>
-                          </div>
-                          <Transition
-                            show={open}
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                          >
-                            <Menu.Items
-                              static
-                              className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            >
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <Link
-                                    href={`/?profileId=${profile.id}`}
-                                    as={`/profiles/${profile.id}`}
-                                    >
-                                    <a className={classNames(
-                                        active ? 'bg-gray-100' : '',
-                                        'block px-4 py-2 text-sm text-gray-700'
-                                      )}>
-                                        Your Profile
-                                    </a>
-                                  </Link>
-                                )}
-                              </Menu.Item>
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <a
-                                    href="/settings"
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    Settings
-                                  </a>
-                                )}
-                              </Menu.Item>
-                              <Menu.Item>
-                                {({ active }) => (
-                                  <a
-                                    href="/signin"
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    Sign out
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            </Menu.Items>
-                          </Transition>
-                        </>
-                      )}
-                    </Menu>
-                  </div>
+                    <p className="mt-3 text-sm text-gray-300 sm:mt-4">
+                      By providing your email, you agree to our{' '}
+                      <a href="#" className="font-medium text-white">
+                        terms or service
+                      </a>
+                      .
+                    </p>
+                  </form>
                 </div>
               </div>
-
-              <Disclosure.Panel className="lg:hidden">
-                <div className="pt-2 pb-3 space-y-1">
-                  {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-                  <a
-                    href="#"
-                    className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                  >
-                    Dashboard
-                  </a>
-                  <a
-                    href="#"
-                    className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                  >
-                    Team
-                  </a>
-                  <a
-                    href="#"
-                    className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    className="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-                  >
-                    Calendar
-                  </a>
+            </div>
+            <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
+              <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
+                <div className="block h-32">
+                  {/* image placeholder */}
                 </div>
-                <div className="pt-4 pb-3 border-t border-gray-200">
-                  <div className="flex items-center px-4">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium text-gray-800">Tom Cook</div>
-                      <div className="text-sm font-medium text-gray-500">tom@example.com</div>
-                    </div>
-                    <button className="ml-auto flex-shrink-0 bg-white p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </div>
-                  <div className="mt-3 space-y-1">
-                    <Link
-                      href={`/?profileId=${profile.id}`}
-                      as={`/profiles/${profile.id}`}
-                    >
-                      <a className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
-                      Your Profile
-                      </a>
-                    </Link>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-                    >
-                      Sign out
-                    </a>
-                  </div>
-                </div>
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-      </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        }
+      </div>
     )
 }
